@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.zc741.xxx.ad.TestActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="225.3px"
+        android:layout_marginTop="15px"
+        android:src="@mipmap/title_bg">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/donateQrcode"
+        android:layout_alignLeft="@+id/donateQrcode"
+        android:layout_alignRight="@+id/donateQrcode"
+        android:layout_alignStart="@+id/donateQrcode"
+        android:layout_below="@+id/donateQrcode"
+        android:gravity="center"
+        android:paddingBottom="40px"
+        android:paddingTop="10px"
+        android:text="捐功德"
+        android:textColor="#dab766" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/templeQRCode"
+        android:layout_alignLeft="@+id/templeQRCode"
+        android:layout_alignRight="@+id/templeQRCode"
+        android:layout_alignStart="@+id/templeQRCode"
+        android:layout_below="@+id/templeQRCode"
+        android:gravity="center"
+        android:paddingBottom="40px"
+        android:paddingTop="10px"
+        android:text="关注寺院在线"
+        android:textColor="#dab766" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView7"
+        android:layout_marginBottom="50px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:background="@drawable/small">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="600px" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:layout_below="@id/videoView"
+            android:background="@drawable/shadow"
+            android:elevation="5dp"
+            android:orientation="horizontal"
+            android:paddingBottom="10px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/donateTitle"
+                android:layout_width="340px"
+                android:text="姓名" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/donateTitle"
+                android:layout_width="265px"
+                android:layout_below="@+id/videoView"
+                android:layout_centerHorizontal="true"
+                android:text="功德" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/donateTitle"
+                android:layout_width="400px"
+                android:text="留言" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout2">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <com.zc741.xxx.ad.utils.MarqueeTextView
+            android:id="@+id/marqueeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="#80000000"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="公告栏"
+            android:textColor="#FFF"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/templeQRCode"
+        android:layout_width="220px"
+        android:layout_height="220px"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignTop="@+id/donateQrcode"
+        android:layout_marginEnd="110dp"
+        android:layout_marginRight="110dp"
+        android:src="@mipmap/syzx" />
+
+    <ImageView
+        android:id="@+id/donateQrcode"
+        android:layout_width="220px"
+        android:layout_height="220px"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_below="@+id/imageView"
+        android:layout_marginLeft="110dp"
+        android:layout_marginStart="110dp"
+        android:src="@mipmap/syzx" />
+
+    <TextView
+        android:id="@+id/clientId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="clientId"
+        android:textColor="#90EEEEEE" />
+
+</android.support.percent.PercentRelativeLayout>

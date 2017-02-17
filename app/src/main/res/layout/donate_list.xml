@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingLeft="100px"
+    android:paddingRight="40px">
+
+    <TextView
+        style="@style/donateItemStyle"
+        android:id="@+id/userName"
+        android:layout_width="260px"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/userIcon"
+        android:layout_toRightOf="@+id/userIcon"
+        android:layout_weight="3"
+        android:gravity="center_vertical"
+        android:maxLength="6"
+        android:paddingLeft="10px"
+        android:text="userName"
+        android:textSize="18sp" />
+
+    <TextView
+        style="@style/donateItemStyle"
+        android:id="@+id/donateFee"
+        android:layout_width="280px"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/userName"
+        android:layout_toRightOf="@+id/userName"
+        android:gravity="center_vertical"
+        android:text="1000元"
+        android:textSize="18sp" />
+
+    <TextView
+        style="@style/donateItemStyle"
+        android:id="@+id/comment"
+        android:layout_width="400px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:maxLength="30"
+        android:paddingLeft="160px"
+        android:paddingStart="160px"
+        android:text="功德無量功德無量"
+        android:textSize="18sp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userIcon"
+        android:layout_width="80px"
+        android:layout_height="70px"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="#dab766"
+        app:civ_border_width="1dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
