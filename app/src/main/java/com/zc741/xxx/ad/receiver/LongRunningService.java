@@ -23,9 +23,6 @@ import static com.zc741.xxx.ad.TestActivity.PRODUCT_URL;
 
 public class LongRunningService extends Service {
 
-
-    private int id;
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
