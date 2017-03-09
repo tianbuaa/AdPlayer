@@ -175,8 +175,6 @@ public class TestActivity extends AppCompatActivity {
         timer.schedule(task, 2000);
 
         handler.postDelayed(runnable, 1000);
-
-
     }
 
     private void initAd() {
@@ -323,7 +321,6 @@ public class TestActivity extends AppCompatActivity {
         for (int i = 0; i < size; i++) {
             multText = multText + marqueeList.get(i).getSummary() + "                                                                                                 ";
         }
-        //Logger.d(multText);
         marqueeTextView.setText(multText);
     }
 
@@ -403,14 +400,12 @@ public class TestActivity extends AppCompatActivity {
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
 
-                //Logger.json(result);
                 Gson gson = new Gson();
                 donateList = gson.fromJson(result, DonateList.class);
                 maxPageNum = donateList.getTotalPage();
                 list = donateList.getList();
                 myAdapter = new MyAdapter(list);
                 recyclerView.setAdapter(myAdapter);
-                //System.out.println(list);
             }
 
             @Override
@@ -448,7 +443,6 @@ public class TestActivity extends AppCompatActivity {
             holder.comment.setText(list.get(position).getContent());
 
             //监听
-            //System.out.println(position);
             //如果 position == list.size()-1; 时 增加一条数据 随机
             if ((position % 19) == 0 && position > 0) {
                 System.out.println("insert------------");
@@ -480,7 +474,6 @@ public class TestActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            //return Integer.MAX_VALUE;
             return list.size();
         }
 
@@ -573,15 +566,12 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void serverVersion() {
-        //String serverVersionUrl = "http://www.zc741.com/siyuanzaixian/version.json";
         String serverVersionUrl = PRODUCT_URL + "/app_check";
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, serverVersionUrl, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
-                //System.out.println("result===" + result);
-
                 parseVersion(result);
             }
 
@@ -594,19 +584,6 @@ public class TestActivity extends AppCompatActivity {
 
     private void parseVersion(String result) {
         Gson gson = new Gson();
-        /*Version version = gson.fromJson(result, Version.class);
-        int serverVersion = version.getVersion();
-        String serverVersionName = version.getVersionName();
-        float serverVersionNameint = Float.parseFloat(serverVersionName);
-        mDownloadUrl = version.getDownloadUrl();*/
-        //System.out.println("serverVersion===" + serverVersion + ";downloadUrl===" + mDownloadUrl);
-
-        /*if (serverVersionNameint > mCurrentVersionName) {
-            checkUpdate();
-        } else {
-            Toast.makeText(this, "当前是最新版本", Toast.LENGTH_SHORT).show();
-        }*/
-
         AppVersion version = gson.fromJson(result, AppVersion.class);
         String serverVersionName = version.getVersionName();
         float serverVersionNameToInt = Float.parseFloat(serverVersionName);
@@ -660,10 +637,6 @@ public class TestActivity extends AppCompatActivity {
                 super.onLoading(total, current, isUploading);
                 mPercent = current * 100 / total;
                 showNotification();
-
-                /*if (current == total) {
-                    System.out.println("下载结束");
-                }*/
             }
 
             @Override
