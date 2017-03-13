@@ -11,6 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.orhanobut.logger.Logger;
+import com.zc741.xxx.ad.bean.TotalTemple;
+
+import static com.zc741.xxx.ad.TestActivity.PRODUCT_URL;
+
 /**
  * The type Main activity.
  */
@@ -19,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editText;
     private String content;
     private String sharePreferenceNumber;
+    private int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         sharePreferenceNumber = sharedPreferences.getString("number", "");
         editText.setText(sharePreferenceNumber);
 
+        // 请求数据 寺院总个数 http://localhost:8080/cli/totalTemple
+        getTotalTemple();
+
+
         assert button != null;
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -42,10 +58,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 content = editText.getText().toString();
                 if (!content.isEmpty()) {
-                    Intent intent = new Intent(MainActivity.this, TestActivity.class);
-                    intent.putExtra("number", content);
-                    startActivity(intent);
-                    finish();
+                    if (Integer.parseInt(content) > total){
+                        Toast.makeText(MainActivity.this, "请输入正确的寺庙号码",Toast.LENGTH_LONG).show();
+                    }else {
+                        Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                        intent.putExtra("number", content);
+                        startActivity(intent);
+                        finish();
+                    }
                 } else {
                     Toast.makeText(MainActivity.this, "请输入机器编号", Toast.LENGTH_LONG).show();
                 }
@@ -65,6 +85,31 @@ public class MainActivity extends AppCompatActivity {
         };
         Timer timer = new Timer();
         timer.schedule(timerTask, 300);*/
+    }
+
+    private void getTotalTemple() {
+        String url = PRODUCT_URL + "/totalTemple";
+        HttpUtils utils = new HttpUtils();
+        utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                String result = responseInfo.result;
+                //Logger.json(result);
+                parseTotal(result);
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+
+            }
+        });
+    }
+
+    private void parseTotal(String result) {
+        Gson gson = new Gson();
+        TotalTemple totalTemple = gson.fromJson(result, TotalTemple.class);
+        total = totalTemple.getTotal();
+        Logger.d(total);
     }
 
     @Override

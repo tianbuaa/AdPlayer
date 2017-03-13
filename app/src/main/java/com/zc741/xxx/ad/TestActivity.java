@@ -83,7 +83,7 @@ public class TestActivity extends AppCompatActivity {
     /**
      * The constant LOCALHOST_URL.
      */
-    public static final String LOCALHOST_URL = "http://10.10.1.122:8080/cli";
+    public static final String LOCALHOST_URL = "http://10.10.1.131:8080/cli";
     /**
      * The constant PRODUCT_URL.
      */
