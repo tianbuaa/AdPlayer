@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -20,7 +21,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.orhanobut.logger.Logger;
 import com.zc741.xxx.ad.bean.TotalTemple;
 
-import static com.zc741.xxx.ad.TestActivity.PRODUCT_URL;
+import static com.zc741.xxx.ad.TestActivity.LOCALHOST_URL;
 
 /**
  * The type Main activity.
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private String content;
     private String sharePreferenceNumber;
     private int total;
+    private TextView templeCounts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.editText);
         Button button = (Button) findViewById(R.id.button);
+        templeCounts = (TextView) findViewById(R.id.totalTemple);
 
         SharedPreferences sharedPreferences = getSharedPreferences("preferencesNumber", MODE_PRIVATE);//第一个参数是文件的名称
         sharePreferenceNumber = sharedPreferences.getString("number", "");
@@ -58,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 content = editText.getText().toString();
                 if (!content.isEmpty()) {
-                    if (Integer.parseInt(content) > total){
-                        Toast.makeText(MainActivity.this, "请输入正确的寺庙号码",Toast.LENGTH_LONG).show();
-                    }else {
+                    if (Integer.parseInt(content) > total) {
+                        Toast.makeText(MainActivity.this, "请输入正确的寺庙号码", Toast.LENGTH_LONG).show();
+                    } else {
                         Intent intent = new Intent(MainActivity.this, TestActivity.class);
                         intent.putExtra("number", content);
                         startActivity(intent);
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTotalTemple() {
-        String url = PRODUCT_URL + "/totalTemple";
+        String url = LOCALHOST_URL + "/totalTemple";
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
@@ -110,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         TotalTemple totalTemple = gson.fromJson(result, TotalTemple.class);
         total = totalTemple.getTotal();
         Logger.d(total);
+        templeCounts.setText("寺院总数：" + total);
     }
 
     @Override
