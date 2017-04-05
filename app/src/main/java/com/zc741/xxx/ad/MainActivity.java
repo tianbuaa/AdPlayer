@@ -21,7 +21,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.orhanobut.logger.Logger;
 import com.zc741.xxx.ad.bean.TotalTemple;
 
-import static com.zc741.xxx.ad.TestActivity.LOCALHOST_URL;
+import static com.zc741.xxx.ad.TestActivity.URL;
 
 /**
  * The type Main activity.
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTotalTemple() {
-        String url = LOCALHOST_URL + "/totalTemple";
+        String url = URL + "/totalTemple";
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override

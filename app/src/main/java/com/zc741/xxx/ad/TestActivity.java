@@ -44,7 +44,6 @@ import com.squareup.picasso.Picasso;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.bugly.crashreport.CrashReport.UserStrategy;
 import com.zc741.xxx.ad.bean.AppVersion;
-import com.zc741.xxx.ad.bean.ClientAdNotice;
 import com.zc741.xxx.ad.bean.DonateList;
 import com.zc741.xxx.ad.bean.WSDonate;
 import com.zc741.xxx.ad.bean.WSMessage;
@@ -81,16 +80,14 @@ public class TestActivity extends AppCompatActivity {
 
     private static final int INSERT_DONATE = 0;
     /**
-     * The constant LOCALHOST_URL.
+     * The constant LOCALHOST_URL
      */
-    public static final String LOCALHOST_URL = "http://192.168.2.189:8080/cli";
-    /**
-     * The constant PRODUCT_URL.
-     */
-    public static final String PRODUCT_URL = "http://www.siyuanzaixian.cn/cli";
-    private ClientAdNotice resource;
+    //public static final String URL = "http://192.168.2.189:8080/cli";
+    public static final String URL = "http://www.siyuanzaixian.cn/cli";
+
+    private ClientAdNoticeNew resource;
     private String url;
-    private List<ClientAdNotice.AdListBean> videoList;
+    private List<ClientAdNoticeNew.AdListBean> videoList;
     private int size;
     private int number;
     private VideoView videoView;
@@ -178,14 +175,15 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void initAd() {
-        String url = PRODUCT_URL + "/clientAdNotice?clientId=" + number;
+        String url = URL + "/clientAdNotice?clientId=" + number;
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
+                Logger.d(result);
                 Gson gson = new Gson();
-                resource = gson.fromJson(result, ClientAdNotice.class);
+                resource = gson.fromJson(result, ClientAdNoticeNew.class);
                 if (resource.getAdList().size() == 0) {
                     videoView.setVideoURI(Uri.parse("http://syzxbkt.oss-cn-hangzhou.aliyuncs.com/video/ad/yns/%E5%BE%B7%E6%B8%85%E6%B0%B8%E5%AE%81%E5%AF%BA%E5%BE%B7%E6%B8%85%E6%B0%B8%E5%AE%81%E5%AF%BA.mp4"));
                     videoView.start();
@@ -292,14 +290,14 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void initMarquee() {
-        String url = PRODUCT_URL + "/clientAdNotice?clientId=" + number;
+        String url = URL + "/clientAdNotice?clientId=" + number;
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
                 Gson gson = new Gson();
-                resource = gson.fromJson(result, ClientAdNotice.class);
+                resource = gson.fromJson(result, ClientAdNoticeNew.class);
                 //公告栏
                 initNotice();
                 //生成二维码
@@ -317,7 +315,7 @@ public class TestActivity extends AppCompatActivity {
     private void initNotice() {
         String multText = "";
         int size = resource.getNoticeList().size();
-        List<ClientAdNotice.NoticeListBean> marqueeList = resource.getNoticeList();
+        List<ClientAdNoticeNew.NoticeListBean> marqueeList = resource.getNoticeList();
         for (int i = 0; i < size; i++) {
             multText = multText + marqueeList.get(i).getSummary() + "                                                                                                 ";
         }
@@ -392,7 +390,7 @@ public class TestActivity extends AppCompatActivity {
     //请求捐赠列表数据
     private void getDonateServer() {
         //首页输入 clientId 传递接收
-        String url = PRODUCT_URL + "/nativeList?clientId=" + number;
+        String url = URL + "/nativeList?clientId=" + number;
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
 
@@ -446,7 +444,7 @@ public class TestActivity extends AppCompatActivity {
             //如果 position == list.size()-1; 时 增加一条数据 随机
             if ((position % 19) == 0 && position > 0) {
                 System.out.println("insert------------");
-                String url = PRODUCT_URL + "/nativeList?clientId=" + number + "&page=1";
+                String url = URL + "/nativeList?clientId=" + number + "&page=1";
                 HttpUtils utils = new HttpUtils();
                 utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
                     @Override
@@ -566,7 +564,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void serverVersion() {
-        String serverVersionUrl = PRODUCT_URL + "/app_check";
+        String serverVersionUrl = URL + "/app_check";
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, serverVersionUrl, new RequestCallBack<String>() {
             @Override

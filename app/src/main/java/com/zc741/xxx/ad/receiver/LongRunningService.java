@@ -15,7 +15,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
-import static com.zc741.xxx.ad.TestActivity.PRODUCT_URL;
+import static com.zc741.xxx.ad.TestActivity.URL;
 
 /**
  * Created by xxx on 2016/12/28.
@@ -48,7 +48,7 @@ public class LongRunningService extends Service {
             public void run() {
                 SharedPreferences sharedPreferences = getSharedPreferences("clientId", MODE_PRIVATE);//第一个参数是文件的名称
                 String sharePreferenceNumber = sharedPreferences.getString("clientAdId", "");
-                String url = PRODUCT_URL + "/heart_notice?clientId=" + Integer.parseInt(sharePreferenceNumber);
+                String url = URL + "/heart_notice?clientId=" + Integer.parseInt(sharePreferenceNumber);
                 HttpUtils utils = new HttpUtils();
                 utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {
                     @Override

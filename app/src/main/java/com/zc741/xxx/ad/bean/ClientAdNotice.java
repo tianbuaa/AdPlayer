@@ -1,9 +1,5 @@
 package com.zc741.xxx.ad.bean;
 
-/**
- * Created by xxx on 2016/12/28.
- */
-
 import java.util.List;
 
 /**
@@ -11,7 +7,6 @@ import java.util.List;
  */
 
 public class ClientAdNotice {
-
 
     /**
      * notice_delay : 60
