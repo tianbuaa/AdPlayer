@@ -357,9 +357,9 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    //生成二维码
+    // 生成二维码
     private void initQrcode() {
-        //支付二维码
+        // 支付二维码
         String payQRCodeUrl = resource.getTemple().getDonate_url();
         ImageView imageView = (ImageView) findViewById(R.id.donateQrcode);
         if (payQRCodeUrl == "") {
@@ -371,7 +371,7 @@ public class TestActivity extends AppCompatActivity {
                     .error(R.mipmap.syzx)
                     .into(imageView);
         }
-        //寺院在线二维码
+        // 寺院在线二维码
         getTempleQRCode();
     }
 
@@ -387,9 +387,9 @@ public class TestActivity extends AppCompatActivity {
                 .into(imageView);
     }
 
-    //请求捐赠列表数据
+    // 请求捐赠列表数据
     private void getDonateServer() {
-        //首页输入 clientId 传递接收
+        // 首页输入 clientId 传递接收
         String url = URL + "/nativeList?clientId=" + number;
         HttpUtils utils = new HttpUtils();
         utils.send(HttpMethod.GET, url, new RequestCallBack<String>() {

@@ -241,12 +241,12 @@ public class ClientAdNoticeNew {
              * content : 身体健康，万事如,意
              */
 
-            private int amount;
+            private float amount;
             private String headimgurl;
             private String salutation;
             private String content;
 
-            public int getAmount() {
+            public float getAmount() {
                 return amount;
             }
 
