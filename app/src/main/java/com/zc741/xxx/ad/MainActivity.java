@@ -2,6 +2,8 @@ package com.zc741.xxx.ad;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private String sharePreferenceNumber;
     private int total;
     private TextView templeCounts;
+    private TextView version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 请求数据 寺院总个数 http://localhost:8080/cli/totalTemple
         getTotalTemple();
+        version = (TextView) findViewById(R.id.textView2);
+        getVersion();
 
 
         assert button != null;
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 String result = responseInfo.result;
-                //Logger.json(result);
+                Logger.json(result);
                 parseTotal(result);
             }
 
@@ -123,5 +128,19 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("number", content);
         editor.apply();
         super.onStop();
+    }
+
+
+    // 获取版本号
+    public void getVersion() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            //int versionCode = packageInfo.versionCode;
+            String versionName = packageInfo.versionName;
+            version.setText("寺院在线提供 V" + versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

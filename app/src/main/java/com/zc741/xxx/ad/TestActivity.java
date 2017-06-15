@@ -120,7 +120,6 @@ public class TestActivity extends AppCompatActivity {
         String content = intent.getStringExtra("number");
         number = Integer.valueOf(content);
         //Logger.d(number);
-
         //ClientId
         TextView clientId = (TextView) findViewById(R.id.clientId);
         assert clientId != null;
@@ -432,10 +431,19 @@ public class TestActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
-            Picasso.with(TestActivity.this)
-                    .load(donateList.getList().get(position).getHeadimgurl())
-                    .error(R.mipmap.avantar)
-                    .into(holder.userIcon);
+            String imgUrl = donateList.getList().get(position).getHeadimgurl();
+            if (imgUrl.equals("")){
+                Picasso.with(TestActivity.this)
+                        .load(R.mipmap.avantar)
+                        .error(R.mipmap.avantar)
+                        .into(holder.userIcon);
+            }else {
+                Picasso.with(TestActivity.this)
+                        .load(donateList.getList().get(position).getHeadimgurl())
+                        .error(R.mipmap.avantar)
+                        .into(holder.userIcon);
+            }
+
             holder.userName.setText(list.get(position).getSalutation());
             holder.donateFee.setText(list.get(position).getAmount() + " 元");
             holder.comment.setText(list.get(position).getContent());
@@ -586,7 +594,7 @@ public class TestActivity extends AppCompatActivity {
         String serverVersionName = version.getVersionName();
         float serverVersionNameToInt = Float.parseFloat(serverVersionName);
         mDownloadUrl = version.getUpdateUrl();
-
+        //mDownloadUrl ="http://www.zc741.com/siyuanzaixian/ad.apk";
         if (serverVersionNameToInt > mCurrentVersionName) {
             checkUpdate();
         } else {
